@@ -1,7 +1,9 @@
-import { ADD_ARTICLE } from "../constants/action-types"
+import { ADD_ARTICLE, FOUND_BAD_WORD, DATA_LOADED } from "../constants/action-types"
 
 const initialState = {
-    articles: []
+    articles: [],
+    remoteArticles: [],
+    message: ""
 }
 
 /*
@@ -28,7 +30,8 @@ function rootReducer(state = initialState, action) {
         */
         return Object.assign({}, state, {
 
-            articles: state.articles.concat(action.payload)
+            articles: state.articles.concat(action.payload),
+            message: "Title added!"
             /* 
                 .concat creates a new array with the values of the original
                 array and a new value appended.
@@ -39,6 +42,20 @@ function rootReducer(state = initialState, action) {
             With Object.assign and .concat we can be sure that the original
             state is not being modified.
         */
+    }
+
+    if (action.type === DATA_LOADED) {
+        return Object.assign({}, state, {
+            remoteArticles: state.remoteArticles.concat(action.payload)
+        });
+    }
+
+    if(action.type === FOUND_BAD_WORD){
+
+        return Object.assign({}, state, {
+
+            message: "You cannot add that title"
+        });
     }
 
     /*

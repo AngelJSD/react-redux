@@ -23,6 +23,12 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
+const mapStateToProps = state => {
+
+    // Extracting just message from the state
+    return { message: state.message }
+}
+
 class ConnectedForm extends Component {
   
     constructor() {
@@ -60,6 +66,7 @@ class ConnectedForm extends Component {
             onChange={this.handleChange}
           />
         </div>
+        <p>{this.props.message}</p>
         <button type="submit" className="btn btn-success btn-lg">
           SAVE
         </button>
@@ -72,6 +79,6 @@ class ConnectedForm extends Component {
     When ther is no mapStateToProps function declared we must pass null
     as the first parameter.
 */
-const Form = connect(null, mapDispatchToProps)(ConnectedForm);
+const Form = connect(mapStateToProps, mapDispatchToProps)(ConnectedForm);
 
 export default Form;

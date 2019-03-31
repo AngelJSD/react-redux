@@ -12,16 +12,18 @@ const mapStateToProps = state => {
     return { articles: state.articles }
 }
 
-class ConnectedList{
+class ConnectedList extends React.Component{
 
     render(){
-        <ul className="list-group list-group-flush">
-            {this.props.articles.map(el => (
-                <li className="list-group-item" key={el.id}>
-                    {el.title}
-                </li>
-            ))}
-        </ul>
+        return(
+            <ul className="list-group list-group-flush">
+                {this.props.articles.map(el => (
+                    <li className="list-group-item" key={el.id}>
+                        {el.title}
+                    </li>
+                ))}
+            </ul>
+        )
     }
     
 }
